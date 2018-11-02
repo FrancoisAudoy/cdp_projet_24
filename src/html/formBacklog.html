@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <title>BackLog - ajout User Story</title>
+</head>
+<body>
+  <script src="../js/formBacklog.js"></script>
+  <h1>Ajouter une User Story au BackLog du projet "<span id="projectName"></span>"</h1>
+  <form>
+    Description :<br>
+    <input type="text" name="description">
+    <br>
+    Difficulté :<br>
+    <input type="number" name="difficulte">
+    <br>
+    Priorité :<br>
+    <input type="text" name="priorite">
+    <br><br>
+    <input type="button" value="Envoyer" onclick="addUserStory()">
+  </form>
+</body>
+</html>

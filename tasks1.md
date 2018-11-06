@@ -25,6 +25,7 @@
 | 21 | Créer un fichier "server.js" qui sert de back-end à l'application. Il permet de gérer les interactions entre la base de données et les requếtes : il exécute les requêtes que le fichier "query.js" lui envoie, et retourne au format JSON les données récupérées sur la base de données. | 1 | / | 0.5 | TODO | François |
 | 22 | Implémenter le fichier "server.js". | 5 | / | 2 | TODO | François |
 | 23 | Créer un fichier "cdp.db" qui permet d'enregistrer toutes les informations. Il est composé de 2 collections : "Projet(int ID, String nom)" et "User_Story(int ID, int ID_projet, String description, int difficulté, String priorité)". | 1 | / | 0.5 | TODO | Charles |
+| 24 | Créer un fichier "index.html" qui correspondra à notre page web d'entré au site. Cette page contiendra seulement un bouton redirigeant vers la page listant les projets (listProj.html). | 1 | / | 0.5 | TODO | François |
 | 24 | Implémenter le fichier "cdp.db". | 2 | / | 0.5 | TODO | Charles |
 | 25 | Ecrire le test pour pouvoir voir la liste des projets. | 3 | 3 | 1 | TODO | Maxime |
 | 26 | Jouer le test précédent. | 1 | 3 | 0.5 | TODO | Maxime |

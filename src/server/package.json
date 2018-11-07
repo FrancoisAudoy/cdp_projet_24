@@ -1,0 +1,14 @@
+{
+  "name": "express_cdp_24",
+  "version": "0.0.1",
+  "description": "Serveur Node.js du projet CDP du groupe 24",
+  "author": "Charles Pellegrini <charles.pellegrini@etu.u-bordeaux.fr>",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
+

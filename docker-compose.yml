@@ -1,0 +1,23 @@
+version: '2'
+services:
+  reverse_proxy:
+    build:
+      context: src/client/
+      dockerfile: Dockerfile
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./conf/nginx.conf:/etc/nginx/nginx.conf:ro
+    networks:
+      - dockersafe24
+  express_server:
+    build: src/server
+    expose:
+      - 8080
+    networks:
+      - dockersafe24
+
+networks:
+  dockersafe24:
+

@@ -13,13 +13,13 @@
 | 9 | Créer un fichier "propProj.js" qui permet de donner un nom à un projet via le champ "Nom" de la page "propProj.html" et de l'ajouter dans la base de données via la fonction "createProject(String name)" du fichier "query.js". Après avoir fini, il y a une redirection vers la page "listProj.html". | 1 | 4 | 0.5 | TODO | François |
 | 10 | Implémenter le fichier "propProj.js". | 3 | 4 | 0.5 | TODO | François |
 | 11 | Créer un fichier "backlog.html" qui décrit la structure de l'affichage du backlog d'un projet via une liste non-ordonnée (sans numéro de ligne). | 1 | 6 | 0.5 | DONE | Maxime |
-| 12 | Implémenter le fichier "backlog.html". | 2 | 6 | 0.5 | TODO | Maxime |
+| 12 | Implémenter le fichier "backlog.html". | 2 | 6 | 0.5 | DOING | Maxime |
 | 13 | Créer un fichier "backlog.js" qui permet de récupérer le backlog d'un projet depuis la base de données via la fonction "getProjectBacklog(String name)" du fichier "query.js", et d'ajouter ses éléments dans le DOM de la page "backlog.html". | 1 | 6 | 0.5 | DONE | Maxime |
-| 14 | Implémenter le fichier "backlog.js". | 2 | 6 | 0.5 | TODO | Maxime |
+| 14 | Implémenter le fichier "backlog.js". | 2 | 6 | 0.5 | DOING | Maxime |
 | 15 | Créer un fichier "formBacklog.html" qui décrit la structure de l'affichage des champs à remplir d'une User Story, c'est-à-dire les champs "Description", "Difficulté" et "Priorité". | 1 | 7 | 0.5 | DONE | Maxime |
-| 16 | Implémenter le fichier "formBacklog.html". | 2 | 7 | 0.5 | TODO | Maxime |
+| 16 | Implémenter le fichier "formBacklog.html". | 2 | 7 | 0.5 | DOING | Maxime |
 | 17 | Créer un fichier "formBacklog.js" qui permet d'ajouter ou de modifier une User Story via les champs de la page "formBacklog.html" puis d'appliquer les changements via les fonctions "addUserStory(String projectName, String description, int difficulte, String priorite)" et "updateUserStory(String projectName, int US_ID, String description, int difficulté, String priorite)" du fichier "query.js", et d'ajouter ses éléments dans le DOM de la page "backlog.html". Après avoir fini, il y a une redirection vers la page "backlog.html". | 1 | 7-8 | 0.5 | DONE | Maxime |
-| 18 | Implémenter le fichier "formBacklog.js" | 3 | 7-8 | 1 | TODO | Maxime |
+| 18 | Implémenter le fichier "formBacklog.js" | 3 | 7-8 | 1 | DOING | Maxime |
 | 19 | Créer un fichier "query.js" qui est composé des fonctions permettant d'interagir avec le serveur, telles que "getAllProjects()", "createProject(String name)", "getProjectBacklog(String name)", "addUserStory(String projectName, String description, int difficulte, String priorite)" et "updateUserStory(String projectName, int US_ID, String description, int difficulté, String priorite)". | 1 | 3-4-6-7-8 | 0.5 | TODO | Charles |
 | 20 | Implémenter le fichier "query.js". | 3 | 3-4-6-7-8 | 1 | TODO | Charles |
 | 21 | Créer un fichier "server.js" qui sert de back-end à l'application. Il permet de gérer les interactions entre la base de données et les requếtes : il exécute les requêtes que le fichier "query.js" lui envoie, et retourne au format JSON les données récupérées sur la base de données. | 1 | / | 0.5 | TODO | François |

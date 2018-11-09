@@ -1,4 +1,8 @@
-# Conduite de projet - BackLog
+# Conduite de projet
+
+[Guide d'installation](installer-guide.md)
+
+## BackLog
 
 | ID | User Story | Difficulté | Priorité |
 |:--:|:-----------:|:----------:|:--------:|

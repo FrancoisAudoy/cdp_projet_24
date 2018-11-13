@@ -1,6 +1,6 @@
 # Conduite de projet
 
-[Guide d'installation](installer-guide.md)
+[Guide d'installation](doc/installer-guide.md)
 
 ## BackLog
 

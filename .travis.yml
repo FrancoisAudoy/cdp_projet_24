@@ -6,11 +6,10 @@ sudo: required
 before_install:
 	- docker-compose up --build&
 	- cd src/server
-	 
 
 befor_script:
 	- cd src/server
 	- npm install mocha
 
-script :
-       - npm test
+script:
+	- npm test

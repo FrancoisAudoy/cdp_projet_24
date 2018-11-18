@@ -5,12 +5,14 @@
   "author": "Charles Pellegrini <charles.pellegrini@etu.u-bordeaux.fr>",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "test": "mocha tests/index.js"
   },
   "dependencies": {
     "body-parser": "^1.18.3",
     "cors": "^2.8.5",
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "mocha": "^5.2.0"
   },
   "devDependencies": {},
   "license": "ISC"

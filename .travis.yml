@@ -1,0 +1,10 @@
+language: node_js
+node_js:
+	- "iojs"
+
+befor_script:
+	cd src/server
+	npm install mocha
+
+script :
+       npm test

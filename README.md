@@ -2,6 +2,7 @@
 
 [Guide d'installation](doc/installer-guide.md)
 
+[![Build Status](https://travis-ci.org/FrancoisAudoy/cdp_projet_24.svg?branch=master)](https://travis-ci.org/FrancoisAudoy/cdp_projet_24)
 ## BackLog
 
 | ID | User Story | Difficulté | Priorité |

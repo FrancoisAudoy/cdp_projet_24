@@ -3,9 +3,16 @@
 const express = require('express');
 const cors = require('cors');
 const bodyparser = require('body-parser');
+const mongoose = require('mongoose');
 
 const PORT = 8080;
 const HOST = '0.0.0.0';
+var DBURL = 'mongodb://mongodb:27017/cdp';
+
+mongoose.connect(DBURL, { useNewUrlParser: true }).catch(function (error) {
+    console.log('Can\'t connect to MongoDB, error : ', error);
+});
+
 
 const jsonParser = bodyparser.json();
 const app = express();

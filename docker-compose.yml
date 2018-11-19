@@ -17,6 +17,15 @@ services:
       - 8080
     networks:
       - dockersafe24
+  mongodb:
+    image: mongo:latest
+    #container_name: "mongodb"
+    environment:
+      - MONGO_DATA_DIR=/var/lib/mongodb/
+    volumes:
+      - ./db:/var/lib/mongodb/
+    networks:
+      - dockersafe24
 
 networks:
   dockersafe24:

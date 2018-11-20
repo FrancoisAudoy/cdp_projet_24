@@ -3,7 +3,9 @@ node_js:
  - "iojs"
 sudo: required
 
-install: none
+before_install: sudo apt-get install docker-compose
+
+install: sudo docker-compose up --build
 
 before_script:
  - cd src/server

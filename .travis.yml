@@ -1,15 +1,22 @@
 language: node_js
 node_js:
-	- "iojs"
+ - "iojs"
+ 
 sudo: required
+os: linux
+dist: trusty
 
+service: docker
+env:
+ - DOCKER_COMPOSE_VERSION=2.0
+ 
 before_install:
-	- docker-compose up --build&
-	- cd src/server
+ - sudo apt update
+ - sudo apt-get install docker-ce
 
-befor_script:
-	- cd src/server
-	- npm install mocha
-
+install: sudo docker-compose up --build &
+before_script:
+ - cd src/server
+ - npm install mocha
 script:
-	- npm test
+ - npm test

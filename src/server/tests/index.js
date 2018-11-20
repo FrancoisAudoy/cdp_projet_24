@@ -1,2 +1,2 @@
 'use strict'
-required('./test_server.js');
+require('./test_server.js');

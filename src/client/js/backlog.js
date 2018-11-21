@@ -12,7 +12,7 @@ function getProjectName() {
     document.title = projectName + " - BackLog";
 }
 
-function getProjectBacklog() {
+/*function getProjectBacklog() {
     data = getBacklog(projectName);
     $.each(data, function (lineNum, value) {
         let tr = document.createElement("tr");
@@ -27,12 +27,26 @@ function getProjectBacklog() {
         tr.append(td);
         backlog.append(tr_US);
     });
+}*/
+
+function fillBacklog(){
+    let backlog = getProjectBacklog(projectName);
+
+    let tableau = document.getElementById("backlog");
+    tableau.innerHTML = "";
+    backlog.forEach( function(element) {
+        tableau.innerHTML += "<tr>";
+        let backlogItem = '<td scope="col">'+element.description+'</td>';
+        backlogItem += '<td scope="col">'+element.priority+'</td>';
+        backlogItem += '<td scope="col">'+element.difficulty+'</td>';
+        tableau.innerHTML += backlogItem+"</tr>";
+    })
 }
 
 function toFormBacklog() {
-    window.location.replace("formBacklog.html");
+    window.location.assign("formBacklog.html");
 }
 
 function toListProj() {
-    window.location.replace("listProj.html");
+    window.location.assign("listProj.html");
 }

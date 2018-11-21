@@ -1,8 +1,7 @@
-let projets =[{ name: "first Projet"},
-		  {name: "Second Projet"}];
+
 
 function toPropProj() {
-    window.location.replace("propProj.html");
+    window.location.assign("propProj.html");
 }
 
 function onClickProj(event){
@@ -10,14 +9,15 @@ function onClickProj(event){
     //requete get projectName
     sessionStorage.setItem('projectName',projectName);
     console.log(projectName);
+    window.location.assign("backlog.html");
 }
 
 function fillListProj(){
     // Use the query
+    let projets = getAllProjects();
     
     let liste = document.getElementById("list_proj");
     liste.innerHTML = "";
-
     projets.forEach( function(element) {
 	let projItem = '<li class="list-group-item " id="' + element.name + '">' +
 	    element.name + '</li>';

@@ -2,7 +2,44 @@
 // TODO Refactoring
 // TODO rendre les fonctions asynchrones
 
-function getAllProjects(){
+let projects = [];
+let backlogs = [];
+
+if(JSON.parse(sessionStorage.getItem('projects')) != null) {
+  projects = JSON.parse(sessionStorage.getItem('projects'));
+}
+
+if(JSON.parse(sessionStorage.getItem('backlogs')) != null) {
+  projects = JSON.parse(sessionStorage.getItem('backlogs'));
+}
+
+function createProject(projectName) {
+  projects.push({"name":projectName});
+  backlogs.push({"'" + projectName + "'":[]});
+  console.log(JSON.stringify(projects));
+  console.log(JSON.stringify(backlogs));
+  sessionStorage.setItem('projects', JSON.stringify(projects));
+  sessionStorage.setItem('backlogs', JSON.stringify(backlogs));
+  alert(sessionStorage.getItem('backlogs'));
+}
+
+function getAllProjects() {
+  return JSON.parse(sessionStorage.getItem('projects'));
+}
+
+function addIssueToBacklog(projectName, description, priority, difficulty) {
+  alert(sessionStorage.getItem('projects'));
+  alert(sessionStorage.getItem('backlogs'));
+  backlogs[projectName].push({"description":description,"priorite":priority,"difficulte":difficulty});
+  sessionStorage.setItem('backlogs', JSON.stringify(backlogs));
+}
+
+function getProjectBacklog(projectName) {
+  let res = JSON.parse(sessionStorage.getItem('backlogs'));
+  return res[projectName];
+}
+
+/*function getAllProjects(){
   const req = new XMLHttpRequest();
   req.open('GET', '/express/projects', false);
   req.send(null);
@@ -86,4 +123,4 @@ function addIssueToBacklog(backlogId, issue){
     console.log("createProject : unhandled error code : %d", req.status);
     console.log(JSON.parse(req.responseText));
   }
-}
+}*/

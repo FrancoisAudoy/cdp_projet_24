@@ -17,6 +17,7 @@ function submitUserStory() {
     let difficulty = document.getElementsByName('difficulty')[0].value;
     let priority = document.getElementsByName('priority')[0].value;
     addIssueToBacklog(projectName,description,difficulty,priority);
+    window.location.assign("backlog.html");
 }
 
 function toBacklog() {

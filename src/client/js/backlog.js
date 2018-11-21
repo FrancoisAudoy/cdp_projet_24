@@ -1,9 +1,8 @@
-const backlog = document.getElementById('#backlog');
 let projectName = "";
 
 let data;
 getProjectName();
-getProjectBacklog();
+fillBacklog();
 
 function getProjectName() {
     let nameSpan = document.getElementById("projectName");
@@ -31,14 +30,14 @@ function getProjectName() {
 
 function fillBacklog(){
     let backlog = getProjectBacklog(projectName);
-
+    console.log(sessionStorage.getItem('backlogs'));
     let tableau = document.getElementById("backlog");
     tableau.innerHTML = "";
-    backlog.forEach( function(element) {
+    backlog[projectName].forEach(function(element) {
         tableau.innerHTML += "<tr>";
         let backlogItem = '<td scope="col">'+element.description+'</td>';
-        backlogItem += '<td scope="col">'+element.priority+'</td>';
-        backlogItem += '<td scope="col">'+element.difficulty+'</td>';
+        backlogItem += '<td scope="col">'+element.priorite+'</td>';
+        backlogItem += '<td scope="col">'+element.difficulte+'</td>';
         tableau.innerHTML += backlogItem+"</tr>";
     })
 }

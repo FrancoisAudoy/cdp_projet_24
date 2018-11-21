@@ -1,50 +1,22 @@
-const submitUserStoryForm = document.querySelector("#submitUserStory");
-submitUserStoryForm.addEventListener('submit', submitUserStory());
-const projectName = "";
-
+let projectName = "";
 getProjectName();
 
-function getProjectName() {
+submitUserStoryForm.addEventListener('submit', submitUserStory());
 
+
+function getProjectName() {
+    let nameSpan = document.getElementById("projectName");
+    projectName = sessionStorage.getItem('projectName');
+    nameSpan.innerHTML = projectName;
+    document.title = projectName + " - Ajout US";
 }
 
 function submitUserStory() {
-
-    let description = $('#description').val();
-    let difficulty = $('#difficulty').val();
-    let priority = $('#priority').val();
-    addUserStory(projectName, description, difficulty, priority);
-    /*$.ajax({
-        url: URLUsers,
-        type: 'POST',
-        contentType: 'text/plain',
-        data: description + "/" + difficulty + "/" + priority,
-        success: function (data) {
-
-        },
-        error: function (XMLHttpRequest, textStatus, errorThrown) {
-
-        }
-    });*/
+    let description = document.getElementsByName('description')[0].value;
+    let difficulty = document.getElementsByName('difficulty')[0].value;
+    let priority = document.getElementsByName('priority')[0].value;
+    addIssueToBacklog();
 }
-
-/*function updateUserStory() {
-    let description = $('#description').val();
-    let difficulty = $('#difficulty').val();
-    let priority = $('#priority').val();
-    $.ajax({
-        url: URLUsers,
-        type: 'POST',
-        contentType: 'text/plain',
-        data: description + "/" + difficulty + "/" + priority,
-        success: function (data) {
-
-        },
-        error: function (XMLHttpRequest, textStatus, errorThrown) {
-
-        }
-    });
-}*/
 
 function toBacklog() {
     window.location.replace("backlog.html");

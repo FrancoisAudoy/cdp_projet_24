@@ -10,17 +10,13 @@ if(JSON.parse(sessionStorage.getItem('projects')) != null) {
 }
 
 if(JSON.parse(sessionStorage.getItem('backlogs')) != null) {
-  projects = JSON.parse(sessionStorage.getItem('backlogs'));
+  backlogs = JSON.parse(sessionStorage.getItem('backlogs'));
 }
 
 function createProject(projectName) {
   projects.push({"name":projectName});
-  backlogs.push({"'" + projectName + "'":[]});
-  console.log(JSON.stringify(projects));
-  console.log(JSON.stringify(backlogs));
   sessionStorage.setItem('projects', JSON.stringify(projects));
-  sessionStorage.setItem('backlogs', JSON.stringify(backlogs));
-  alert(sessionStorage.getItem('backlogs'));
+  //sessionStorage.setItem('backlogs', JSON.stringify(backlogs));
 }
 
 function getAllProjects() {
@@ -28,15 +24,33 @@ function getAllProjects() {
 }
 
 function addIssueToBacklog(projectName, description, priority, difficulty) {
-  alert(sessionStorage.getItem('projects'));
-  alert(sessionStorage.getItem('backlogs'));
-  backlogs[projectName].push({"description":description,"priorite":priority,"difficulte":difficulty});
+  let res = {};
+  if(getProjectBacklog(projectName) != null){
+    res[projectName] = [getProjectBacklog(projectName)[0],{"description":description,"priorite":priority,"difficulte":difficulty}];
+  }
+  else{
+    res[projectName] = [{"description":description,"priorite":priority,"difficulte":difficulty}];
+  }
+  backlogs.push(res);
   sessionStorage.setItem('backlogs', JSON.stringify(backlogs));
 }
 
 function getProjectBacklog(projectName) {
   let res = JSON.parse(sessionStorage.getItem('backlogs'));
-  return res[projectName];
+  console.log(res);
+  let elem = null;
+  let i = -1;
+  if(res != null){
+    while(elem==null){
+      i++;
+      elem = res[i][projectName];
+    }
+    return res[i];
+  }
+  else{
+    return null;
+  }
+  
 }
 
 /*function getAllProjects(){

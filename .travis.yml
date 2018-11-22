@@ -15,7 +15,9 @@ before_install:
  - sudo apt update
  - sudo apt-get install docker-ce
 
-install: sudo docker-compose up --build &
+install:
+ - sudo docker-compose build
+ - sudo docker-compose up
 
 before_script:
  - cd src/server

@@ -51,16 +51,21 @@ app.post('/projects', (req, res) => {
 
 // obtient un projet à partir de son identifiant
 app.get('/projects/:project', (req,res) => {
-  // TODO
+  models.Project.findById(req.params.project, function(error, project){
+    if (error)
+      res.status(400).json(error);
+    else
+      res.json(project);
+  });
 });
 
 // modifie un projet
-app.put('/projects:project', (req, res) => {
+app.put('/projects/:project', (req, res) => {
   // TODO
 });
 
 // supprime un projet
-app.delete('/projects:project', (req,res) => {
+app.delete('/projects/:project', (req,res) => {
   // TODO
 });
 
@@ -88,9 +93,18 @@ app.post('/backlogs', (req, res) => {
   });
 });
 
-// obtient un backlog à partir de son identifiant
-app.get('/backlogs/:backlog', (req,res) => {
-  // TODO
+// obtient un backlog en fonction de son projectId
+app.get('/backlogs/fromProjectId/:projectId', (req, res) => {
+  console.log('kek');
+  console.log(req.params.projectId);
+  var r = models.Backlog.findOne({projectId: req.params.projectId}, function(error, backlog){
+    if (error)
+      res.status(400).json(error);
+    else
+      res.json(backlog);
+  });
+  if(r == null)
+    res.status(400).json(null);
 });
 
 // modifie un backlog

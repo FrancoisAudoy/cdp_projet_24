@@ -2,7 +2,7 @@
 const base_url = '/express';
 
 const assert = require('assert');
-const server = require('../server');
+//const server = require('../server');
 const should = require('should');
 const request = require('supertest');
 

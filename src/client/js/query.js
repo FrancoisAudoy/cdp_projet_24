@@ -31,14 +31,14 @@ function getAllProjects() {
 function addIssueToBacklog(projectName, description, priority, difficulty) {
   let tmp = backlogs[Object.keys(backlogs)[0]];
   let i = 0;
-  while(Object.keys(backlogs[Object.keys(backlogs)[i]]) != projectName){
+  while (Object.keys(backlogs[Object.keys(backlogs)[i]]) != projectName) {
     i++;
   }
   tmp = backlogs[Object.keys(backlogs)[i]];
-  
+
   tmp = tmp[Object.keys(tmp)[0]];
   console.log(JSON.stringify(tmp));
-  tmp.push({"description": description, "priorite": priority, "difficulte": difficulty});
+  tmp.push({ "description": description, "priorite": priority, "difficulte": difficulty });
   sessionStorage.setItem('backlogs', JSON.stringify(backlogs));
 }
 

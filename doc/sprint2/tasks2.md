@@ -16,11 +16,11 @@
 | 12 | Créer un fichier "cdp.db" qui permet d'enregistrer toutes les informations. Il est composé de 2 collections : "Projet(int ID, String nom)" et "User_Story(int ID, int ID_projet, String description, int difficulté, String priorité)". | 1 | / | 0.5 | DONE | Charles |
 | 13 | Implémenter le fichier "cdp.db". | 2 | / | 0.5 | DONE | Charles |
 | 14 | Implémenter le fichier "index.html" qui correspondra à notre page web d'entrée au site. Cette page contiendra seulement un bouton redirigeant vers la page listant les projets (listProj.html). | 1 | / | 0.5 | DOING | François |
-| 15 | Ecrire le test pour pouvoir voir la liste des projets. | 3 | 3 | 1 | TODO | Maxime |
+| 15 | Ecrire le test pour pouvoir voir la liste des projets. | 3 | 3 | 1 | DOING | Maxime |
 | 16 | Jouer le test précédent. | 1 | 3 | 0.5 | TODO | Maxime |
-| 17 | Ecrire le test pour pouvoir créer un nouveau projet. | 3 | 4 | 1 | TODO | Maxime |
+| 17 | Ecrire le test pour pouvoir créer un nouveau projet. | 3 | 4 | 1 | DOING | Maxime |
 | 18 | Jouer le test précédent. | 1 | 4 | 0.5 | TODO | Maxime |
-| 19 | Ecrire le test pour accéder au BackLog d'un projet. | 3 | 6 | 1 | TODO | Maxime |
+| 19 | Ecrire le test pour accéder au BackLog d'un projet. | 3 | 6 | 1 | DOING | Maxime |
 | 20 | Jouer le test précédent. | 1 | 6 | 0.5 | TODO | Maxime |
 | 21 | Ecrire le test pour ajouter une User Story à un projet. | 3 | 7 | 1 | TODO | François |
 | 22 | Jouer le test précédent. | 1 | 7 | 0.5 | TODO | François |

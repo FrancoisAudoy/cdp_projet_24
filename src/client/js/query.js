@@ -2,21 +2,26 @@
 // TODO Refactoring
 // TODO rendre les fonctions asynchrones
 
+// BLOC DE FONCTIONS SI BD NON-FONCTIONNELLE
+
 let projects = [];
 let backlogs = [];
 
-if(JSON.parse(sessionStorage.getItem('projects')) != null) {
+if (JSON.parse(sessionStorage.getItem('projects')) != null) {
   projects = JSON.parse(sessionStorage.getItem('projects'));
 }
 
-if(JSON.parse(sessionStorage.getItem('backlogs')) != null) {
+if (JSON.parse(sessionStorage.getItem('backlogs')) != null) {
   backlogs = JSON.parse(sessionStorage.getItem('backlogs'));
 }
 
 function createProject(projectName) {
-  projects.push({"name":projectName});
+  projects.push({ "name": projectName });
+  let res = {};
+  res[projectName] = [];
+  backlogs.push(res);
   sessionStorage.setItem('projects', JSON.stringify(projects));
-  //sessionStorage.setItem('backlogs', JSON.stringify(backlogs));
+  sessionStorage.setItem('backlogs', JSON.stringify(backlogs));
 }
 
 function getAllProjects() {
@@ -24,34 +29,37 @@ function getAllProjects() {
 }
 
 function addIssueToBacklog(projectName, description, priority, difficulty) {
-  let res = {};
-  if(getProjectBacklog(projectName) != null){
-    res[projectName] = [getProjectBacklog(projectName)[0],{"description":description,"priorite":priority,"difficulte":difficulty}];
+  let tmp = backlogs[Object.keys(backlogs)[0]];
+  let i = 0;
+  while(Object.keys(backlogs[Object.keys(backlogs)[i]]) != projectName){
+    i++;
   }
-  else{
-    res[projectName] = [{"description":description,"priorite":priority,"difficulte":difficulty}];
-  }
-  backlogs.push(res);
+  tmp = backlogs[Object.keys(backlogs)[i]];
+  
+  tmp = tmp[Object.keys(tmp)[0]];
+  console.log(JSON.stringify(tmp));
+  tmp.push({"description": description, "priorite": priority, "difficulte": difficulty});
   sessionStorage.setItem('backlogs', JSON.stringify(backlogs));
 }
 
 function getProjectBacklog(projectName) {
   let res = JSON.parse(sessionStorage.getItem('backlogs'));
-  console.log(res);
   let elem = null;
   let i = -1;
-  if(res != null){
-    while(elem==null){
+  if (res != null) {
+    while (elem == null) {
       i++;
       elem = res[i][projectName];
     }
     return res[i];
   }
-  else{
+  else {
     return null;
   }
-  
+
 }
+
+// FIN BLOC
 
 /*function getAllProjects(){
   const req = new XMLHttpRequest();

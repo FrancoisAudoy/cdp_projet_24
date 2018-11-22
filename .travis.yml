@@ -7,8 +7,9 @@ os: linux
 dist: trusty
 
 service: docker
-env:
- - DOCKER_COMPOSE_VERSION=2.0
+
+addons:
+ firefox : latest
  
 before_install:
  - sudo apt update
@@ -18,7 +19,10 @@ install: sudo docker-compose up --build &
 
 before_script:
  - cd src/server
- - npm install mocha supertest should
+ - npm install mocha supertest should testcafe 
  
 script:
 - npm test
+
+notifications:
+ email: false

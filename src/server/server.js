@@ -66,7 +66,14 @@ app.put('/projects/:project', (req, res) => {
 
 // supprime un projet
 app.delete('/projects/:project', (req,res) => {
-  // TODO
+  models.Project.findOneAndDelete({_id: req.params.project}, function(error, project){
+    if (error)
+      res.status(400).json(error);
+    else if (project)
+      res.json(project);
+    else
+      res.status(401).json({});
+  });
 });
 
 // obtient la liste des backlogs
@@ -95,7 +102,6 @@ app.post('/backlogs', (req, res) => {
 
 // obtient un backlog en fonction de son projectId
 app.get('/backlogs/fromProjectId/:projectId', (req, res) => {
-  console.log('kek');
   console.log(req.params.projectId);
   var r = models.Backlog.findOne({projectId: req.params.projectId}, function(error, backlog){
     if (error)
@@ -114,7 +120,14 @@ app.put('/backlogs/:backlog', (req, res) => {
 
 // supprime un backlog
 app.delete('/backlogs/:backlog', (req,res) => {
-  // TODO
+  models.Backlog.findOneAndDelete({_id: req.params.backlog}, function(error, backlog){
+    if (error)
+      res.status(400).json(error);
+    else if (backlog)
+      res.json(backlog);
+    else
+      res.status(401).json({});
+  });
 });
 
 // ajoute une issue à un backlog

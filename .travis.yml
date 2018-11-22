@@ -18,7 +18,7 @@ install: sudo docker-compose up --build &
 
 before_script:
  - cd src/server
- - npm install
+ - npm install mocha supertest should
  
 script:
 - npm test

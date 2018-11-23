@@ -13,16 +13,18 @@ function getProjectName() {
 
 function fillBacklog() {
     let backlog = getProjectBacklog(projectName);
-    let tableau = document.getElementById("backlog");
-    tableau.innerHTML = "";
-    backlog[projectName].forEach(function (element) {
-        tableau.innerHTML += "<tr>";
-        let backlogItem = '<td scope="col"></td>';
-        backlogItem += '<td scope="col">' + element.description + '</td>';
-        backlogItem += '<td scope="col">' + element.priorite + '</td>';
-        backlogItem += '<td scope="col">' + element.difficulte + '</td>';
-        tableau.innerHTML += backlogItem + "</tr>";
-    })
+    if(backlog != null) {
+	let tableau = document.getElementById("backlog");
+	tableau.innerHTML = "";
+	backlog[projectName].forEach(function (element) {
+            tableau.innerHTML += "<tr>";
+            let backlogItem = '<td scope="col"></td>';
+            backlogItem += '<td scope="col">' + element.description + '</td>';
+            backlogItem += '<td scope="col">' + element.priorite + '</td>';
+            backlogItem += '<td scope="col">' + element.difficulte + '</td>';
+            tableau.innerHTML += backlogItem + "</tr>";
+	});
+    }
 }
 
 function toFormBacklog() {

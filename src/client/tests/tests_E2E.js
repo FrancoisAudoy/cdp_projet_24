@@ -36,6 +36,7 @@ test('Affichage backlog', async t => {
     await t
         .click('#AddProjet')
         .typeText('#name', 'Sample project')
+	.click('#submit-button')
         .click('#Sample project')
         .click('#AddUserStory')
         .typeText('#description', 'a')

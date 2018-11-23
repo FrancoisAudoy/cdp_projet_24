@@ -5,11 +5,13 @@ fixture`Créer un projet`
 
 test('Ajout nom projet', async t => {
     await t
-    .typeText('#name', 'Project 1')
-    .click('#AddProjet')
-    .typeText('#name', 'Project 2')
-    .expect(Selector('#list_proj').innerText).contains('Project 1')
-    .expect(Selector('#list_proj').innerText).contains('Project 2');
+	.typeText('#name', 'Project 1')
+	.click('#submit-button')
+	.click('#AddProjet')
+	.typeText('#name', 'Project 2')
+	.click('#submit-button')
+	.expect(Selector('#list_proj').innerText).contains('Project 1')
+	.expect(Selector('#list_proj').innerText).contains('Project 2');
 });
 
 fixture`Lister les projets`
@@ -19,8 +21,10 @@ test('Liste projets', async t => {
     await t
         .click('#AddProjet')
         .typeText('#name', 'Project 1')
+    	.click('#submit-button')
         .click('#AddProjet')
         .typeText('#name', 'Project 2')
+    	.click('#submit-button')
         .expect(Selector('#list_proj').innerText).contains('Project 1')
         .expect(Selector('#list_proj').innerText).contains('Project 2');
 })
@@ -37,7 +41,7 @@ test('Affichage backlog', async t => {
         .typeText('#description', 'a')
         .typeText('#difficulty', 'b')
         .typeText('#priority', 'c')
-        .click('#submitUserStory')
+        .click('#submitUserStoryButton')
         .expect(Selector('#backlog').innerText).contains('a')
         .expect(Selector('#backlog').innerText).contains('b')
         .expect(Selector('#backlog').innerText).contains('c');

@@ -18,15 +18,16 @@ function fillListProj(){
     // Use the query
     let projets = getAllProjects();
 
-    let liste = document.getElementById("list_proj");
-    liste.innerHTML = "";
-    projets.forEach( function(element) {
-	let projItem = '<li class="list-group-item " id="' + element.name + '">' +
-	    element.name + '</li>';
-	liste.insertAdjacentHTML('beforeend', projItem);
-	document.getElementById(element.name).dbid = element._id;
-	document.getElementById(element.name).addEventListener("click",onClickProj);
-    });
+    if(projets != null){
+      let liste = document.getElementById("list_proj");
+      liste.innerHTML = "";
+      projets.forEach( function(element) {
+  	let projItem = '<li class="list-group-item " id="' + element.name + '">' + element.name + '</li>';
+  	liste.insertAdjacentHTML('beforeend', projItem);
+  	document.getElementById(element.name).dbid = element._id;
+  	document.getElementById(element.name).addEventListener("click",onClickProj);
+      });
+    }
 }
 
 document.getElementById("AddProjet").addEventListener("click",toPropProj);

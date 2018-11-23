@@ -19,18 +19,19 @@ function getProjectId() {
 
 function fillBacklog() {
     let backlog = getBacklogByProjectId(projectId);
-    console.log(backlog);
-    sessionStorage.setItem('backlogId', backlog._id);
-    let tableau = document.getElementById("backlog");
-    tableau.innerHTML = "";
-    backlog.issues.forEach(function (element) {
+    if(backlog != null){
+      sessionStorage.setItem('backlogId', backlog._id);
+      let tableau = document.getElementById("backlog");
+      tableau.innerHTML = "";
+      backlog.issues.forEach(function (element) {
         tableau.innerHTML += "<tr>";
         let backlogItem = '<td scope="col"></td>';
         backlogItem += '<td scope="col">' + element.description + '</td>';
         backlogItem += '<td scope="col">' + element.difficulty + '</td>';
         backlogItem += '<td scope="col">' + element.priority + '</td>';
         tableau.innerHTML += backlogItem + "</tr>";
-    })
+      })
+    }
 }
 
 function toFormBacklog() {

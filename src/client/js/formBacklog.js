@@ -1,7 +1,9 @@
 let projectName = "";
+let backlogId = "";
 getProjectName();
+getBacklogId();
 
-let submitUserStoryForm = document.getElementById("submitUserStory");
+let submitUserStoryForm = document.getElementById("submitUserStoryForm");
 submitUserStoryForm.addEventListener('submit', submitUserStory);
 
 
@@ -12,11 +14,17 @@ function getProjectName() {
     document.title = projectName + " - Ajout US";
 }
 
+function getBacklogId() {
+    backlogId = sessionStorage.getItem('backlogId');
+}
+
+
 function submitUserStory() {
     let description = document.getElementsByName('description')[0].value;
     let difficulty = document.getElementsByName('difficulty')[0].value;
     let priority = document.getElementsByName('priority')[0].value;
-    addIssueToBacklog(projectName, description, difficulty, priority);
+    let issue = {description: description, difficulty: difficulty, priority: priority};
+    addIssueToBacklog(backlogId, issue);
     window.location.assign("backlog.html");
 }
 

@@ -9,12 +9,12 @@
 
 <body>
 
-  <script src="../js/query.js" defer></script>
-  <script src="../js/formBacklog.js" defer></script>
+  <script src="/js/query.js" defer></script>
+  <script src="/js/formBacklog.js" defer></script>
 
   <h1>Ajouter une User Story au BackLog du projet "<span id="projectName"></span>"</h1>
 
-  <form id="submitUserStory">
+  <form id="submitUserStoryForm">
     <div class="form-group">
       <label>Description</label>
       <input id="description" type="text" name="description">
@@ -27,7 +27,7 @@
       <label>Priorité</label>
       <input id="difficulty" type="text" name="priority">
     </div>
-    <input id="submitUserStory" type="button" value="Envoyer" onclick="submitUserStory()">
+    <input id="submitUserStoryButton" type="button" value="Envoyer" onclick="submitUserStory()">
     <input type="button" value="Annuler" onclick="toBacklog()">
   </form>
 </body>

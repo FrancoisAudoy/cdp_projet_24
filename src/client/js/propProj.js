@@ -4,6 +4,10 @@ function toListProj() {
 
 function submitProjectName() {
     let projectName = document.getElementsByName('name')[0].value;
-    createProject(projectName);
+    projectReturn = createProject(projectName);
+    console.log(projectReturn);
+    let projectId = projectReturn['project']['_id'];
+    console.log(projectId);
+    createBacklog({name: projectName, projectId: projectId});
     window.location.assign("listProj.html");
 }

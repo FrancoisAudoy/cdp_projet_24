@@ -45,7 +45,7 @@ app.post('/projects', (req, res) => {
     if(error)
       res.status(400).json(error);
     else
-      res.status(201).json({msg : 'Added project'});
+      res.status(201).json({msg : 'Added project', project: project});
   });
 });
 
@@ -90,7 +90,7 @@ app.get('/backlogs', (req, res) => {
 app.post('/backlogs', (req, res) => {
   var backlog = new models.Backlog();
   // TODO check if there is a project, check if it already has a backlog
-  backlog.projectID = req.body.projectID;
+  backlog.projectId = req.body.projectId;
   backlog.name = req.body.name;
   backlog.save(function(error, backlog){
     if(error)
@@ -110,7 +110,7 @@ app.get('/backlogs/fromProjectId/:projectId', (req, res) => {
       res.json(backlog);
   });
   if(r == null)
-    res.status(400).json(null);
+    res.status(404).json(null);
 });
 
 // modifie un backlog
@@ -133,6 +133,8 @@ app.delete('/backlogs/:backlog', (req,res) => {
 // ajoute une issue à un backlog
 app.post('/backlogs/:backlog/issue', (req, res) => {
   var issue = new models.Issue(req.body.issue);
+  console.log('ROAD');
+  console.log(issue);
   var r = models.Backlog.findOneAndUpdate({_id: req.params.backlog}, {$push: {issues: issue}}, {upsert:true}, function(error, backlog){
     if (error)
       res.status(400).json(error);

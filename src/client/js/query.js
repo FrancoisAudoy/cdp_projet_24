@@ -2,66 +2,7 @@
 // TODO Refactoring
 // TODO rendre les fonctions asynchrones
 
-// BLOC DE FONCTIONS SI BD NON-FONCTIONNELLE
-
-let projects = [];
-let backlogs = [];
-
-if (JSON.parse(sessionStorage.getItem('projects')) != null) {
-  projects = JSON.parse(sessionStorage.getItem('projects'));
-}
-
-if (JSON.parse(sessionStorage.getItem('backlogs')) != null) {
-  backlogs = JSON.parse(sessionStorage.getItem('backlogs'));
-}
-
-function createProject(projectName) {
-  projects.push({ "name": projectName });
-  let res = {};
-  res[projectName] = [];
-  backlogs.push(res);
-  sessionStorage.setItem('projects', JSON.stringify(projects));
-  sessionStorage.setItem('backlogs', JSON.stringify(backlogs));
-}
-
-function getAllProjects() {
-  return JSON.parse(sessionStorage.getItem('projects'));
-}
-
-function addIssueToBacklog(projectName, description, priority, difficulty) {
-  let tmp = backlogs[Object.keys(backlogs)[0]];
-  let i = 0;
-  while (Object.keys(backlogs[Object.keys(backlogs)[i]]) != projectName) {
-    i++;
-  }
-  tmp = backlogs[Object.keys(backlogs)[i]];
-
-  tmp = tmp[Object.keys(tmp)[0]];
-  console.log(JSON.stringify(tmp));
-  tmp.push({ "description": description, "priorite": priority, "difficulte": difficulty });
-  sessionStorage.setItem('backlogs', JSON.stringify(backlogs));
-}
-
-function getProjectBacklog(projectName) {
-  let res = JSON.parse(sessionStorage.getItem('backlogs'));
-  let elem = null;
-  let i = -1;
-  if (res != null) {
-    while (elem == null) {
-      i++;
-      elem = res[i][projectName];
-    }
-    return res[i];
-  }
-  else {
-    return null;
-  }
-
-}
-
-// FIN BLOC
-
-/*function getAllProjects(){
+function getAllProjects(){
   const req = new XMLHttpRequest();
   req.open('GET', '/express/projects', false);
   req.send(null);
@@ -71,6 +12,7 @@ function getProjectBacklog(projectName) {
   } else {
     console.log("getAllProjects : unhandled error code : %d", req.status);
     console.log(JSON.parse(req.responseText));
+    return {};
   }
 }
 
@@ -86,12 +28,14 @@ function createProject(projectName){
   } else {
     console.log("createProject : unhandled error code : %d", req.status);
     console.log(JSON.parse(req.responseText));
+    return {};
   }
 }
 
-function getProjectById(){
+// check url for injection
+function getProjectById(projectId){
   const req = new XMLHttpRequest();
-  req.open('GET', '/express/projects', false);
+  req.open('GET', '/express/projects/'+projectId, false);
   req.send(null);
   if (req.status === 200) {
     var json = JSON.parse(req.responseText);
@@ -99,9 +43,24 @@ function getProjectById(){
   } else {
     console.log("getAllProjects : unhandled error code : %d", req.status);
     console.log(JSON.parse(req.responseText));
+    return {};
   }
 }
 
+// check url for injection
+function deleteProjectById(projectId){
+  const req = new XMLHttpRequest();
+  req.open('DELETE', '/express/projects/'+projectId, false);
+  req.send(null);
+  if (req.status === 200) {
+    var json = JSON.parse(req.responseText);
+    return json;
+  } else {
+    console.log("getAllProjects : unhandled error code : %d", req.status);
+    console.log(JSON.parse(req.responseText));
+    return {};
+  }
+}
 
 function getAllBacklogs(){
   const req = new XMLHttpRequest();
@@ -113,11 +72,24 @@ function getAllBacklogs(){
   } else {
     console.log("getAllBacklogs : unhandled error code : %d", req.status);
     console.log(JSON.parse(req.responseText));
+    return {};
   }
 }
 
-function getProjectBacklog(name){
-  // TODO
+function getBacklogByProjectId(projectId){
+  const req = new XMLHttpRequest();
+  req.open('GET', '/express/backlogs/fromProjectId/'+projectId, false);
+  req.send(null);
+  if (req.status === 200) {
+  console.log(req.responseText);
+    var json = JSON.parse(req.responseText);
+    return json;
+  } else {
+    console.log("getAllBacklogs : unhandled error code : %d", req.status);
+    console.log(JSON.parse(req.responseText));
+    return {};
+  }
+
 }
 
 function createBacklog(jsonObject){
@@ -127,9 +99,11 @@ function createBacklog(jsonObject){
   req.send(JSON.stringify(jsonObject));
   if (req.status === 201) {
     console.log("response : %s", req.responseText);
+    return {};
   } else {
-    console.log("createProject : unhandled error code : %d", req.status);
+    console.log("createBacklog : unhandled error code : %d", req.status);
     console.log(JSON.parse(req.responseText));
+    return {};
   }
 }
 
@@ -138,11 +112,15 @@ function addIssueToBacklog(backlogId, issue){
   const req = new XMLHttpRequest();
   req.open('POST', '/express/backlogs/'+backlogId+'/issue', false);
   req.setRequestHeader('Content-Type','application/json; charset=utf-8');
-  req.send(JSON.stringify(issue));
+  console.log("lel");
+  console.log(backlogId);
+  console.log(issue);
+  req.send(JSON.stringify({issue: issue}));
   if (req.status === 200) {
     console.log("response : %s", req.responseText);
   } else {
-    console.log("createProject : unhandled error code : %d", req.status);
+    console.log("addIssueToBacklog : unhandled error code : %d", req.status);
     console.log(JSON.parse(req.responseText));
+    return {};
   }
-}*/
+}

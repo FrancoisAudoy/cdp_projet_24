@@ -3,6 +3,10 @@
 [Guide d'installation](doc/installer-guide.md)
 
 [![Build Status](https://travis-ci.org/FrancoisAudoy/cdp_projet_24.svg?branch=master)](https://travis-ci.org/FrancoisAudoy/cdp_projet_24)
+
+## Definition of Done
+Nous considérons une tâche terminée lorsque le code lié à cette tâche a été revu et validé par le groupe. Les tests d'une tâche ne sont pas nécessaires à sa validation : les tests sont des tâches indépendantes. 
+
 ## BackLog
 
 | ID | User Story | Difficulté | Priorité |

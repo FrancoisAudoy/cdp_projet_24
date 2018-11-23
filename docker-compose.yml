@@ -20,10 +20,11 @@ services:
   mongodb:
     image: mongo:latest
     #container_name: "mongodb"
-    environment:
-      - MONGO_DATA_DIR=/var/lib/mongodb/
+    #environment:
+    #  - MONGO_DATA_DIR=/var/lib/mongodb/
     volumes:
-      - ./db:/var/lib/mongodb/
+      #- ./db:/var/lib/mongodb/:rw
+      - ./db/:/data/db/
     networks:
       - dockersafe24
 

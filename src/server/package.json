@@ -6,7 +6,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "test": "mocha tests/index.js; testcafe firefox ../client/tests/tests_E2E.js"
+    "test": "mocha tests/index.js"
   },
   "dependencies": {
     "cors": "^2.8.5",

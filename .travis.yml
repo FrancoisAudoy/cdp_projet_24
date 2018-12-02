@@ -22,13 +22,16 @@ before_install:
 install:
  - sudo docker-compose build
  - sudo docker-compose up -d
-
-before_script:
- - cd src/server
- - npm install mocha supertest should testcafe 
  
 script:
-- npm test
+ - echo "############ TEST SERVER ############"
+ - cd src/server
+ - npm install mocha supertest should 
+ - npm test
+ - echo "############ TEST CLIENT ############"
+ - cd ../cdp_24_app/
+ - npm install
+ - npm test
 
 notifications:
  email: false

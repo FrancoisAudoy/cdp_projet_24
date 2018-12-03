@@ -1,3 +1,9 @@
 #Emacs
 *~
 db
+
+#Sonar
+.scannerwork
+
+#VScode
+.vscode

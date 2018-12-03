@@ -12,6 +12,8 @@ addons:
  firefox : latest
  apt:
   package: docker-ce
+ sonnarcloud:
+  organization: francoisaudoy-github
  
 before_install:
  - export DISPLAY=:99.0
@@ -24,6 +26,7 @@ install:
  - sudo docker-compose up -d
  
 script:
+ - sonar-scanner -Dsonar.login=${SONAR_LOGIN}
  - cd src/server
  - npm install mocha supertest should 
  - npm test

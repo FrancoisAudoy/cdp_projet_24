@@ -12,7 +12,7 @@ addons:
  firefox : latest
  apt:
   package: docker-ce
- sonnarcloud:
+ sonarcloud:
   organization: francoisaudoy-github
  
 before_install:

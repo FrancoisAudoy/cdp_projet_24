@@ -26,7 +26,7 @@ install:
  - sudo docker-compose up -d
  
 script:
- - sonar-scanner -Dsonar.login=${SONAR_LOGIN} -Dsonar.exclusions=${TRAVIS_BUILD_DIR}/db/**
+ - sonar-scanner -Dsonar.login=${SONAR_LOGIN}
  - cd src/server
  - npm install mocha supertest should 
  - npm test

@@ -10,10 +10,10 @@ service: docker
 
 addons:
  firefox : latest
+ apt:
+  package: docker-ce
  
 before_install:
- - sudo apt update
- - sudo apt-get install docker-ce
  - export DISPLAY=:99.0
  - sh -e /etc/init.d/xvfb start
  - sleep 3
@@ -24,11 +24,9 @@ install:
  - sudo docker-compose up -d
  
 script:
- - echo "############ TEST SERVER ############"
  - cd src/server
  - npm install mocha supertest should 
  - npm test
- - echo "############ TEST CLIENT ############"
  - cd ../cdp_24_app/
  - npm install
  - npm test

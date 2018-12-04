@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import {
     Route,
     NavLink,
-    HashRouter
+    BrowserRouter
 } from "react-router-dom";
 import listProj from "./listProj";
 import listIssues from "./listIssues";
@@ -11,7 +11,7 @@ import listSprint from "./listSprint";
 class Main extends Component {
     render() {
         return (
-            <HashRouter>
+            <BrowserRouter>
                 <div>
                     <h1>Project Manager 2_4</h1>
                     <ul className="header">
@@ -27,7 +27,7 @@ class Main extends Component {
                         <Route path="/tasks" component={listIssues} />
                     </div>
                 </div>
-            </HashRouter>
+            </BrowserRouter>
         );
     }
 }

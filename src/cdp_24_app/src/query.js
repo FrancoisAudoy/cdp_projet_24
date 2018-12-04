@@ -2,64 +2,74 @@
 // TODO Refactoring
 // TODO rendre les fonctions asynchrones
 
+function useFetchParam(Method, Data){
+    return { method : Method, mode: 'cors', body: Data};
+}
+
 export function getAllProjects(){
-  const req = new XMLHttpRequest();
-  req.open('GET', '/express/projects', false);
-  req.send(null);
-  if (req.status === 200) {
-    var json = JSON.parse(req.responseText);
-    return json;
-  } else {
-    console.log("getAllProjects : unhandled error code : %d", req.status);
-    console.log(JSON.parse(req.responseText));
-    return {};
-  }
+    fetch('/express/projects')
+	.then((response) => {
+	    if (response.status === 200) {
+		var json = JSON.parse(response.json());
+		return json;
+	    } else {
+		console.log("getAllProjects : unhandled error code : %d", response.status);
+		console.log(JSON.parse(response.responseText));
+		return {};
+	    }
+	});
+    
 }
 
 export function createProject(projectName){
-  var jsonObject = {name: projectName};
-  const req = new XMLHttpRequest();
-  req.open('POST', '/express/projects', false);
+    var jsonObject = {name: projectName};
+    fetch('express/projects', useFetchParam('POST', JSON.stringify(jsonObject)))
+	.then((response) => {
+	    if (response.status === 201) {
+		var json = JSON.parse(response.responseText);
+		return json;
+	    } else {
+		console.log("createProject : unhandled error code : %d", response.status);
+		console.log(JSON.parse(response.responseText));
+		return {};
+	    }
+	});
+   /* const req = new XMLHttpRequest();
+    req.open('POST', '/express/projects', false);
   req.setRequestHeader('Content-Type','application/json; charset=utf-8');
-  req.send(JSON.stringify(jsonObject));
-  if (req.status === 201) {
-    var json = JSON.parse(req.responseText);
-    return json;
-  } else {
-    console.log("createProject : unhandled error code : %d", req.status);
-    console.log(JSON.parse(req.responseText));
-    return {};
-  }
+  req.send(JSON.stringify(jsonObject));*/
+  
 }
 
 // check url for injection
 export function getProjectById(projectId){
-  const req = new XMLHttpRequest();
-  req.open('GET', '/express/projects/'+projectId, false);
-  req.send(null);
-  if (req.status === 200) {
-    var json = JSON.parse(req.responseText);
-    return json;
-  } else {
-    console.log("getAllProjects : unhandled error code : %d", req.status);
-    console.log(JSON.parse(req.responseText));
-    return {};
-  }
+    fetch('/express/projects/'+projectId)
+	.then((response) => {
+	    if (response.status === 200) {
+		var json = JSON.parse(response.responseText);
+		return json;
+	    } else {
+		console.log("getAllProjects : unhandled error code : %d", response.status);
+		console.log(JSON.parse(response.responseText));
+		return {};
+	    }
+	});
 }
 
 // check url for injection
 export function deleteProjectById(projectId){
-  const req = new XMLHttpRequest();
-  req.open('DELETE', '/express/projects/'+projectId, false);
-  req.send(null);
-  if (req.status === 200) {
-    var json = JSON.parse(req.responseText);
-    return json;
-  } else {
-    console.log("getAllProjects : unhandled error code : %d", req.status);
-    console.log(JSON.parse(req.responseText));
-    return {};
-  }
+    fetch('/express/projects/'+projectId, useFetchParam('DELETE',null))
+	.then((response) => {
+	    if (response.status === 200) {
+		var json = JSON.parse(response.responseText);
+		return json;
+	    } else {
+		console.log("getAllProjects : unhandled error code : %d", response.status);
+		console.log(JSON.parse(response.responseText));
+		return {};
+	    }
+	});
+  
 }
 
 export function getAllBacklogs(){
@@ -77,50 +87,46 @@ export function getAllBacklogs(){
 }
 
 export function getBacklogByProjectId(projectId){
-  const req = new XMLHttpRequest();
-  req.open('GET', '/express/backlogs/fromProjectId/'+projectId, false);
-  req.send(null);
-  if (req.status === 200) {
-  console.log(req.responseText);
-    var json = JSON.parse(req.responseText);
-    return json;
-  } else {
-    console.log("getAllBacklogs : unhandled error code : %d", req.status);
-    console.log(JSON.parse(req.responseText));
-    return {};
-  }
+    fetch('/express/backlogs/fromProjectId/'+projectId)
+	.then((response) => {
+	    if (response.status === 200) {
+		console.log(response.responseText);
+		var json = JSON.parse(response.responseText);
+		return json;
+	    } else {
+		console.log("getAllBacklogs : unhandled error code : %d", response.status);
+		console.log(JSON.parse(response.responseText));
+		return {};
+	    }
+	});
 
 }
 
 export function createBacklog(jsonObject){
-  const req = new XMLHttpRequest();
-  req.open('POST', '/express/backlogs', false);
-  req.setRequestHeader('Content-Type','application/json; charset=utf-8');
-  req.send(JSON.stringify(jsonObject));
-  if (req.status === 201) {
-    console.log("response : %s", req.responseText);
-    return {};
-  } else {
-    console.log("createBacklog : unhandled error code : %d", req.status);
-    console.log(JSON.parse(req.responseText));
-    return {};
-  }
+    fetch('/express/backlogs', useFetchParam('POST', JSON.stringify(jsonObject)))
+	.then((response) => {
+	    if (response.status === 201) {
+		console.log("response : %s", response.responseText);
+		return {};
+	    } else {
+		console.log("createBacklog : unhandled error code : %d", response.status);
+		console.log(JSON.parse(response.responseText));
+		return {};
+	    }
+	});
+  
 }
 
 //Should check projectId url injection
 export function addIssueToBacklog(backlogId, issue){
-  const req = new XMLHttpRequest();
-  req.open('POST', '/express/backlogs/'+backlogId+'/issue', false);
-  req.setRequestHeader('Content-Type','application/json; charset=utf-8');
-  console.log("lel");
-  console.log(backlogId);
-  console.log(issue);
-  req.send(JSON.stringify({issue: issue}));
-  if (req.status === 200) {
-    console.log("response : %s", req.responseText);
-  } else {
-    console.log("addIssueToBacklog : unhandled error code : %d", req.status);
-    console.log(JSON.parse(req.responseText));
-    return {};
-  }
+    fetch('/express/backlogs/'+backlogId+'/issue', useFetchParam("POST",JSON.stringify(issue)))
+	.then((response) => {
+	    if (response.status === 200) {
+		console.log("response : %s", response.responseText);
+	    } else {
+		console.log("addIssueToBacklog : unhandled error code : %d", response.status);
+		console.log(JSON.parse(response.responseText));
+		return {};
+	    }
+	});
 }

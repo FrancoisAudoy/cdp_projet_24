@@ -4,7 +4,7 @@
 
 [![Build Status](https://travis-ci.org/FrancoisAudoy/cdp_projet_24.svg?branch=master)](https://travis-ci.org/FrancoisAudoy/cdp_projet_24)
 
-![CodeSmell](https://sonarcloud.io/api/project_badges/measure?project=FrancoisAudoy_cdp_projet_24&metric=code_smells) ![Quality Code](https://sonarcloud.io/api/project_badges/measure?project=FrancoisAudoy_cdp_projet_24&metric=alert_status)
+[![CodeSmell](https://sonarcloud.io/api/project_badges/measure?project=FrancoisAudoy_cdp_projet_24&metric=code_smells)](https://sonarcloud.io/dashboard?id=FrancoisAudoy_cdp_projet_24) [![Quality Code](https://sonarcloud.io/api/project_badges/measure?project=FrancoisAudoy_cdp_projet_24&metric=alert_status)](https://sonarcloud.io/dashboard?id=FrancoisAudoy_cdp_projet_24)
 
 ## Definition of Done
 Nous considérons une tâche terminée lorsque le code lié à cette tâche a été revu et validé par le groupe. Les tests d'une tâche ne sont pas nécessaires à sa validation : les tests sont des tâches indépendantes. 

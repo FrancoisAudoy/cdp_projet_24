@@ -1,16 +1,15 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import  Popup  from 'reactjs-popup';
+import Popup from 'reactjs-popup';
 
-import { getAllProjects, createProject } from "./query";
+import { getAllProjects, createProject, deleteProjectById } from "./query";
 
 
 class listProj extends Component {
 
     constructor() {
-	super();
-	
-	this.sendNewProjet = this.sendNewProjet.bind(this);
+        super();
+        this.sendNewProjet = this.sendNewProjet.bind(this);
     }
 
     requestAllProject() {
@@ -18,46 +17,53 @@ class listProj extends Component {
     }
 
 
-    sendNewProjet(){
-	let field = document.getElementById("nameProj");
-	console.log(field.value);
-	let ret =  createProject(field.value)
-	console.log(ret);
+    sendNewProjet() {
+        let field = document.getElementById("nameProj");
+        console.log(field.value);
+        let ret = createProject(field.value);
+        console.log(ret);
     }
 
-    
-    
     render() {
         let listProject;
         let allProjects = this.requestAllProject();
 
         if (allProjects !== null && allProjects !== undefined)
             listProject = allProjects.map((proj) =>
-					  <li> <Link to={'/backlog/' + proj.name}> {proj.name}</Link> </li>);
+                <li> <Link to={'/backlog/' + proj.name}> {proj.name}</Link>
+                    <Popup trigger={<button className="button btn-primary rounded-circle">Supprimer</button>}
+                        modal>
+
+                        <h1>Êtes-vous sûr de vouloir supprimer le projet "{proj.name}" ?</h1>
+
+                        <button onClick={deleteProjectById(proj.name)}>Supprimer</button>
+
+                    </Popup>
+                </li>);
 
         return (
-		<div>
+            <div>
                 <h2>Liste des projets</h2>
                 <div className="container">
-                <div className="row">
-                <div className="col-sm col-9">
-                <ul className="list-group m-5" id="list_proj">{listProject}</ul>
+                    <div className="row">
+                        <div className="col-sm col-9">
+                            <ul className="list-group m-5" id="list_proj">{listProject}</ul>
 
-		<Popup trigger={<button className="button btn-primary rounded-circle">+</button>}
-	    modal>
-		
-		<h1> Nouveau Projet</h1>
-		
-		<form>
-		Nom : <input type="text" id="nameProj"/>
-		<input type="submit" id="accept" value="create" onClick={this.sendNewProjet}/>
-		</form>
-		
-	    </Popup>
+                            <Popup trigger={<button className="button btn-primary rounded-circle">+</button>}
+                                modal>
+
+                                <h1> Nouveau Projet</h1>
+
+                                <form>
+                                    Nom : <input type="text" id="nameProj" />
+                                    <input type="submit" id="accept" value="create" onClick={this.sendNewProjet} />
+                                </form>
+
+                            </Popup>
+                        </div>
+                    </div>
+                </div>
             </div>
-                </div>
-                </div>
-		</div>
 
         );
     }

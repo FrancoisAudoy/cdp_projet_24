@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import  Popup  from 'reactjs-popup';
 
 import { getBacklogByProjectId, createBacklog } from "./query";
@@ -7,7 +6,7 @@ import { getBacklogByProjectId, createBacklog } from "./query";
 class listIssues extends Component {
 
     constructor(){
-	super();
+    super();
 	this.createUS = this.createUS.bind(this);
 	this.createTask = this.createTask.bind(this);
     }
@@ -38,7 +37,7 @@ class listIssues extends Component {
 
         if (backlog !== null && backlog !== undefined)
             listUS = backlog.map((US) =>
-                <li>{US.description},{US.priority},{US.difficulty}</li>);
+                <li>{US.description},{US.priorite},{US.difficulte}</li>);
 
         if(listType === "backlog") {
             return (

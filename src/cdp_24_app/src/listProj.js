@@ -4,17 +4,11 @@ import  Popup  from 'reactjs-popup';
 
 import { getAllProjects, createProject } from "./query";
 
-let str = '/backlog/toto';
-
 
 class listProj extends Component {
 
     constructor() {
 	super();
-	
-	this.state = {
-	    modalIsOpen: false
-	};
 	
 	this.sendNewProjet = this.sendNewProjet.bind(this);
     }

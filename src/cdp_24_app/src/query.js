@@ -10,8 +10,10 @@ function error(Code){
     return !(Code >= 200 && Code < 300);
 }
 
+let BASE_URL = 'http://localhost/express';
+
 export function getAllProjects(){
-    fetch('/express/projects')
+    fetch(BASE_URL + '/projects')
 	.then((response) => {
 	    if (!error(response.status)) {
 		var json = response.json();
@@ -28,7 +30,7 @@ export function getAllProjects(){
 
 export function createProject(projectName){
     var jsonObject = {name: projectName};
-    let response = fetch('/express/projects', useFetchParam('POST', JSON.stringify(jsonObject)));
+    let response = fetch(BASE_URL + '/projects', useFetchParam('POST', JSON.stringify(jsonObject)));
     if (!error(response.status)) {
 	return response.json();
     } else {
@@ -38,7 +40,7 @@ export function createProject(projectName){
     }
     
     /* const req = new XMLHttpRequest();
-    req.open('POST', '/express/projects', false);
+    req.open('POST', BASE_URL + '/projects', false);
   req.setRequestHeader('Content-Type','application/json; charset=utf-8');
   req.send(JSON.stringify(jsonObject));*/
   
@@ -46,7 +48,7 @@ export function createProject(projectName){
 
 // check url for injection
 export function getProjectById(projectId){
-    fetch('/express/projects/'+projectId)
+    fetch(BASE_URL + '/projects/'+projectId)
 	.then((response) => {
 	    if (!error(response.status)) {
 		var json = JSON.parse(response.responseText);
@@ -61,7 +63,7 @@ export function getProjectById(projectId){
 
 // check url for injection
 export function deleteProjectById(projectId){
-    fetch('/express/projects/'+projectId, useFetchParam('DELETE',null))
+    fetch(BASE_URL + '/projects/'+projectId, useFetchParam('DELETE',null))
 	.then((response) => {
 	    if (!error(response.status)) {
 		var json = JSON.parse(response.responseText);
@@ -77,7 +79,7 @@ export function deleteProjectById(projectId){
 
 export function getAllBacklogs(){
   const req = new XMLHttpRequest();
-  req.open('GET', '/express/backlogs', false);
+  req.open('GET', BASE_URL + '/backlogs', false);
   req.send(null);
   if (req.status === 200) {
     var json = JSON.parse(req.responseText);
@@ -90,7 +92,7 @@ export function getAllBacklogs(){
 }
 
 export function getBacklogByProjectId(projectId){
-    fetch('/express/backlogs/fromProjectId/'+projectId)
+    fetch(BASE_URL + '/backlogs/fromProjectId/'+projectId)
 	.then((response) => {
 	    if (!error(response.status)) {
 		console.log(response.responseText);
@@ -106,7 +108,7 @@ export function getBacklogByProjectId(projectId){
 }
 
 export function createBacklog(jsonObject){
-    fetch('/express/backlogs', useFetchParam('POST', JSON.stringify(jsonObject)))
+    fetch(BASE_URL + '/backlogs', useFetchParam('POST', JSON.stringify(jsonObject)))
 	.then((response) => {
 	    if (!error(response.status)) {
 		console.log("response : %s", response.responseText);
@@ -122,7 +124,7 @@ export function createBacklog(jsonObject){
 
 //Should check projectId url injection
 export function addIssueToBacklog(backlogId, issue){
-    fetch('/express/backlogs/'+backlogId+'/issue', useFetchParam("POST",JSON.stringify(issue)))
+    fetch(BASE_URL + '/backlogs/'+backlogId+'/issue', useFetchParam("POST",JSON.stringify(issue)))
 	.then((response) => {
 	    if (!error(response.status)) {
 		console.log("response : %s", response.responseText);

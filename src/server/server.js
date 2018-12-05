@@ -39,9 +39,9 @@ app.get('/projects', (req, res) => {
 
 // crée un projet
 app.post('/projects', (req, res) => {
-  var project = new models.Project();
-  project.name = req.body.name;
-  project.save(function(error, project){
+    var project = new models.Project();
+    project.name = req.body.name;
+    project.save(function(error, project){
     if(error)
       res.status(400).json(error);
     else

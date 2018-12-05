@@ -3,7 +3,13 @@
 // TODO rendre les fonctions asynchrones
 
 function useFetchParam(Method, Data){
-    return { method : Method, mode: 'cors', body: Data};
+    return { credentials: 'include',
+	     method : Method,
+	     mode: 'no-cors',
+	     body: Data,
+	     headers:{
+		 'Accept' : 'application/json',
+		 'Content-Type': 'application/json'}};
 }
 
 function error(Code){
@@ -13,11 +19,10 @@ function error(Code){
 let BASE_URL = 'http://localhost/express';
 
 export function getAllProjects(){
-    fetch(BASE_URL + '/projects')
+    fetch(BASE_URL + '/projects?format=json&callback=?')
 	.then((response) => {
 	    if (!error(response.status)) {
 		var json = response.json();
-		console.log(">>>>GetAllProjects response : " + JSON.parse(response));
 		return json;
 	    } else {
 		console.log("getAllProjects : unhandled error code : %d", response.status);
@@ -28,18 +33,21 @@ export function getAllProjects(){
     
 }
 
-export function createProject(projectName){
+export async function createProject(projectName){
     var jsonObject = {name: projectName};
-    let response = fetch(BASE_URL + '/projects', useFetchParam('POST', JSON.stringify(jsonObject)));
-    if (!error(response.status)) {
-	return response.json();
-    } else {
-	console.log("createProject : unhandled error code : %d", response.status);
-	console.log(response.json());
-	return {};
-    }
-    
-    /* const req = new XMLHttpRequest();
+    await fetch(BASE_URL + '/projects?format=json&callback=?',
+		useFetchParam('POST', JSON.stringify(jsonObject)))
+	.then((response) => {
+	    if (!error(response.status)) {
+		return response.json();
+	    } else {
+		console.log("createProject : unhandled error code : %d", response.status);
+		console.log(response.json());
+		return {};
+	    }
+	});
+
+/* const req = new XMLHttpRequest();
     req.open('POST', BASE_URL + '/projects', false);
   req.setRequestHeader('Content-Type','application/json; charset=utf-8');
   req.send(JSON.stringify(jsonObject));*/

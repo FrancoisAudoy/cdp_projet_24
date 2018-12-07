@@ -8,8 +8,8 @@ const request = require('supertest');
 describe("Server", () => {
     describe("Database", () => {
 	it('get empty', (done) =>{
-	    request('localhost:8080')
-		.get('/projects')
+	    request('localhost')
+		.get(base_url + '/projects?format=json&callback=?')
 		.expect('Content-Type', /json/)
 		.end((err, res) => {
 		    if (err){
@@ -24,19 +24,19 @@ describe("Server", () => {
 
 	it('post - get not empty', (done) => {
 	    let data = {name:"projet un"};
-	    request('localhost:8080')
-		.post('/projects')
+	    request('http://localhost')
+		.post(base_url + '/projects?format=json&callback=?')
 		.send(JSON.stringify(data))
 		.expect(201)
 		.end((err, res) => {
 			if(err){
-				console.log('Error code : ' + err);
-				assert(false);
+			    console.log('Error code : ' + err);
+			    
 			}
 		});
 	    
-	     request('localhost:8080')
-		.get('/projects')
+	     request('http://localhost')
+		.get(base_url + '/projects?format=json&callback=?')
 		.expect('Content-Type', /json/)
 		.end((err, res) => {
 		    if (err){

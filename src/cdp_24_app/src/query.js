@@ -19,7 +19,7 @@ function error(Code){
 let BASE_URL = 'http://localhost/express';
 
 export function getAllProjects(){
-    fetch(BASE_URL + '/projects?format=json&callback=?')
+    fetch(BASE_URL + '/projects?format=json')
 	.then((response) => {
 	    if (!error(response.status)) {
 		var json = response.json();
@@ -34,9 +34,11 @@ export function getAllProjects(){
 }
 
 export async function createProject(projectName){
-    var jsonObject = {name: projectName};
-    await fetch(BASE_URL + '/projects?format=json&callback=?',
-		useFetchParam('POST', JSON.stringify(jsonObject)))
+    let jsonObject = {name: projectName};
+    let paramPOST = useFetchParam('POST', JSON.stringify(jsonObject));
+
+    await fetch(BASE_URL + '/projects?format=json',
+		paramPOST)
 	.then((response) => {
 	    if (!error(response.status)) {
 		return response.json();

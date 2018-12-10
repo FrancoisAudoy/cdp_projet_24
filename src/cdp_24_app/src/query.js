@@ -16,7 +16,7 @@ function error(Code){
     return !(Code >= 200 && Code < 300);
 }
 
-let BASE_URL = 'http://localhost/express';
+let BASE_URL = '/express';
 
 export function getAllProjects(){
     fetch(BASE_URL + '/projects?format=json')
@@ -26,11 +26,11 @@ export function getAllProjects(){
 		return json;
 	    } else {
 		console.log("getAllProjects : unhandled error code : %d", response.status);
-		console.log(JSON.parse(response));
+		//console.log(JSON.parse(response));
+		console.log(json);
 		return {};
 	    }
 	});
-    
 }
 
 export async function createProject(projectName){
@@ -129,7 +129,6 @@ export function createBacklog(jsonObject){
 		return {};
 	    }
 	});
-  
 }
 
 //Should check projectId url injection

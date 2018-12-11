@@ -33,31 +33,6 @@ export function getAllProjects(){
     });
 }
 
-
-/*export async function createProject(projectName){
-  let jsonObject = {name: projectName};
-  let paramPOST = useFetchParam('POST', jsonObject);
-
-  await fetch(BASE_URL + '/projects', paramPOST)
-    .then(handleErrors)
-    .then(response => response.json())
-    .then(data => {
-      console.log(data)
-    })
-    .catch(error => {
-      console.log(error);
-      //console.log("createProject : unhandled error code : %d", response.status);
-      //console.log(response.json());
-      //return {};
-    });
-
-/* const req = new XMLHttpRequest();
-    req.open('POST', BASE_URL + '/projects', false);
-  req.setRequestHeader('Content-Type','application/json; charset=utf-8');
-  req.send(JSON.stringify(jsonObject));*/
-  
-//}*/
-
 export function createProject(projectName){
   let jsonObject = {name: projectName};
   let paramPOST = useFetchParam('POST', jsonObject);
@@ -67,19 +42,7 @@ export function createProject(projectName){
     .then(response => response.json())
     .then(data => {
       console.log(data)
-    })
-    .catch(error => {
-      console.log(error);
-      //console.log("createProject : unhandled error code : %d", response.status);
-      //console.log(response.json());
-      //return {};
     });
-
-/* const req = new XMLHttpRequest();
-    req.open('POST', BASE_URL + '/projects', false);
-  req.setRequestHeader('Content-Type','application/json; charset=utf-8');
-  req.send(JSON.stringify(jsonObject));*/
-  
 }
 
 // check url for injection
@@ -99,17 +62,10 @@ export function getProjectById(projectId){
 
 // check url for injection
 export function deleteProjectById(projectId){
-    fetch(BASE_URL + '/projects/'+projectId, useFetchParam('DELETE', null))
-	.then((response) => {
-            if (!isError(response.status)) {
-                var json = JSON.parse(response.responseText);
-                return json;
-            } else {
-                console.log("getAllProjects : unhandled error code : %d", response.status);
-                console.log(JSON.parse(response.responseText));
-                return {};
-            }
-        });
+  fetch(BASE_URL + '/projects/'+projectId, useFetchParam('DELETE', {}))
+    .then(handleErrors)
+    .then(response => response.json())
+    .then(data => console.log(data));
 }
 
 export function getAllBacklogs(){

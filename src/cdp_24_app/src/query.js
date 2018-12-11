@@ -5,7 +5,6 @@
 function useFetchParam(httpMethod, data){
   return { credentials: 'include',
            method : httpMethod,
-           mode: 'no-cors',
            body: JSON.stringify(data),
            headers:{
             'Accept' : 'application/json',

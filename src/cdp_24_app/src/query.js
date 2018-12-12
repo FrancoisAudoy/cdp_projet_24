@@ -1,6 +1,4 @@
 // TODO IMPLEMENT ISSUE CLASS : CONTAINS String description, int difficulte, String priorite
-// TODO Refactoring
-// TODO rendre les fonctions asynchrones
 
 function useFetchParam(httpMethod, data){
   return { credentials: 'include',
@@ -67,14 +65,7 @@ export function getBacklogByProjectId(projectId){
 
 //Should check projectId url injection
 export function addIssueToBacklog(backlogId, issue){
-    return fetch(BASE_URL + '/backlogs/'+backlogId+'/issue', useFetchParam("POST", issue))
-        .then((response) => {
-            if (!isError(response.status)) {
-                console.log("response : %s", response.responseText);
-            } else {
-                console.log("addIssueToBacklog : unhandled error code : %d", response.status);
-                console.log(JSON.parse(response.responseText));
-                return {};
-            }
-        });
+  return fetch(BASE_URL + '/backlogs/'+backlogId+'/issue', useFetchParam("POST", issue))
+    .then(handleErrors)
+    .then(response => response.json());
 }

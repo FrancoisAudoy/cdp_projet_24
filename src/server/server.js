@@ -130,9 +130,7 @@ app.delete('/backlogs/:backlog', (req,res) => {
 
 // ajoute une issue à un backlog
 app.post('/backlogs/:backlog/issue', (req, res) => {
-  var issue = new models.Issue(req.body.issue);
-  console.log('ROAD');
-  console.log(issue);
+  var issue = new models.Issue(req.body);
   var r = models.Backlog.findOneAndUpdate({_id: req.params.backlog}, {$push: {issues: issue}}, {upsert:true}, function(error, backlog){
     if (error)
       res.status(400).json(error);
@@ -141,7 +139,6 @@ app.post('/backlogs/:backlog/issue', (req, res) => {
     else
       res.status(401).json({});
   });
-  console.log('r = ' + r);
 });
 
 app.listen(PORT, HOST);

@@ -30,7 +30,6 @@ class listProj extends Component {
   render() {
     const { projects } = this.state;
     let listProject;
-    console.log(this.state.projects);
     return (
       <div>
         <h2>Liste des projets</h2>

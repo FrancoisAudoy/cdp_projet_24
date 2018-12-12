@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import  Popup  from 'reactjs-popup';
 
-import { getProjectById, getBacklogByProjectId } from "./query";
+import { getProjectById, getBacklogByProjectId, addIssueToBacklog } from "./query";
 
 class listIssues extends Component {
-
   constructor(){
     super();
     let splitUrl = window.location.pathname.split("/");
@@ -19,12 +18,13 @@ class listIssues extends Component {
     this.createTask = this.createTask.bind(this);
   }
 
-  createUS(){
+  createUS(e){
+    e.preventDefault();
     let descr = document.getElementById("descrUS").value;
     let diff = document.getElementById("diffUS").value;
     let prio = document.getElementById("prioUS").value;
-    let object = {description: descr, difficulty: diff, priority: prio};
-    //createBacklog(JSON.stringyfy(object));
+    let issue = {description: descr, difficulty: diff, priority: prio};
+    addIssueToBacklog(this.state._id, issue);
   }
 
   createTask(){
@@ -33,7 +33,6 @@ class listIssues extends Component {
     let us = document.getElementById("usTask").value;
     let time = document.getElementById("timeTask").value;
     let object = {description: descr, difficulty: diff, userStory: us, time: time};
-    //createBacklog(JSON.stringyfy(object));
   }
 
   componentDidMount() {
@@ -44,7 +43,6 @@ class listIssues extends Component {
 
     getBacklogByProjectId(this.state.projectId)
       .then(backlog => {
-        console.log(backlog);
         this.setState({ _id: backlog._id});
         this.setState({ issues: backlog.issues});
       })
@@ -60,16 +58,13 @@ class listIssues extends Component {
     const { projectName } = this.state;
     const { issues } = this.state;
     let listUS;
-    //if (backlog !== null && backlog !== undefined)
-    //  listUS = backlog.map((US) =>
-    //    <li>{US.description},{US.priorite},{US.difficulte}</li>);
 
     if(this.state.listType === "backlog") {
       return (
         <div>
           <h2>Backlog du projet "{projectName}"</h2>
           <ul>
-            {issues.map(issue => <li>{issue.description},{issue.priorite},{issue.difficulte}</li>)}
+            {issues.map(issue => <li>{issue.description}, {issue.priority}, {issue.difficulty}</li>)}
           </ul>
           <Popup trigger={<button className="button btn-primary rounded-circle">+</button>} modal>
             <h1> Nouvel US</h1>
@@ -79,6 +74,7 @@ class listIssues extends Component {
               Difficulté : <input type="text" id="diffUS"/> <br/>
               <input type="submit" id="accept" value="create" onClick={this.createUS}/>
             </form>
+
           </Popup>
         </div>
       );
@@ -88,7 +84,7 @@ class listIssues extends Component {
         <div>
           <h2>Tâches du projet "{projectName}"</h2>
           <ul>
-            {issues.map(issue => <li>{issue.description},{issue.priorite},{issue.difficulte}</li>)}
+            {issues.map(issue => <li>{issue.description},{issue.priority},{issue.difficulty}</li>)}
           </ul>
           <Popup trigger={<button className="button btn-primary rounded-circle">+</button>} modal>
             <h1> Nouvel US</h1>

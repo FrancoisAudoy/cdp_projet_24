@@ -15,7 +15,8 @@ class listProj extends Component {
 
   sendNewProjet() {
     let field = document.getElementById("nameProj");
-    createProject(field.value);
+    createProject(field.value)
+      .catch(error => {console.log(error)});
   }
 
   componentDidMount() {
@@ -47,10 +48,8 @@ class listProj extends Component {
               }</ul>
               <Popup trigger={<button className="button btn-primary rounded-circle">+</button>} modal>
                 <h1> Nouveau Projet</h1>
-                <form>
                   Nom : <input type="text" id="nameProj" />
                   <input type="submit" id="accept" value="create" onClick={this.sendNewProjet} />
-                </form>
               </Popup>
             </div>
           </div>

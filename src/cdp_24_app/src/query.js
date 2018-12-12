@@ -9,10 +9,6 @@ function useFetchParam(httpMethod, data){
             'Content-Type': 'application/json'}};
 }
 
-function isError(Code){
-  return !(Code >= 200 && Code < 300);
-}
-
 let BASE_URL = '/express';
 
 function handleErrors(response) {

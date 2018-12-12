@@ -34,31 +34,27 @@ export function createProject(projectName){
   let jsonObject = {name: projectName};
   let paramPOST = useFetchParam('POST', jsonObject);
 
-  fetch(BASE_URL + '/projects', paramPOST)
+  return fetch(BASE_URL + '/projects', paramPOST)
     .then(handleErrors)
     .then(response => response.json())
-    .then(data => {
-      console.log(data)
-    });
 }
 
 // check url for injection
 export function getProjectById(projectId){
-  fetch(BASE_URL + '/projects/'+projectId)
+  return fetch(BASE_URL + '/projects/'+projectId)
     .then(handleErrors)
     .then(response => response.json());
 }
 
 // check url for injection
 export function deleteProjectById(projectId){
-  fetch(BASE_URL + '/projects/'+projectId, useFetchParam('DELETE', {}))
+  return fetch(BASE_URL + '/projects/'+projectId, useFetchParam('DELETE', {}))
     .then(handleErrors)
     .then(response => response.json())
-    .then(data => console.log(data));
 }
 
 export function getAllBacklogs(){
-  fetch(BASE_URL + '/backlogs')
+  return fetch(BASE_URL + '/backlogs')
     .then(handleErrors)
     .then(response => response.json());
 }
@@ -71,7 +67,7 @@ export function getBacklogByProjectId(projectId){
 
 //Should check projectId url injection
 export function addIssueToBacklog(backlogId, issue){
-    fetch(BASE_URL + '/backlogs/'+backlogId+'/issue', useFetchParam("POST", issue))
+    return fetch(BASE_URL + '/backlogs/'+backlogId+'/issue', useFetchParam("POST", issue))
         .then((response) => {
             if (!isError(response.status)) {
                 console.log("response : %s", response.responseText);

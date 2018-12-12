@@ -12,13 +12,17 @@ class listProj extends Component {
     };
   }
 
-  componentDidMount() {
+  updateList() {
     getAllProjects()
       .then(data => this.setState({ projects: data }))
       .catch(error => {
         console.log(error);
         this.setState({ projects: [] });
       });
+  }
+
+  componentDidMount() {
+    this.updateList();
   }
 
   render() {
@@ -40,6 +44,7 @@ class listProj extends Component {
                           <button
                             onClick={() => {
                               deleteProjectById(proj._id)
+                                .then(this.updateList())
                                 .then(close())
                                 .catch(error => {console.log(error)});
                             }}>
@@ -59,6 +64,7 @@ class listProj extends Component {
                        onClick={() => {
                          let field = document.getElementById("nameProj");
                          createProject(field.value)
+                           .then(this.updateList())
                            .then(close())
                            .catch(error => {console.log(error)});
                        }} />

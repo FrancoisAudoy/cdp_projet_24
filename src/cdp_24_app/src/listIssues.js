@@ -68,7 +68,9 @@ class listIssues extends Component {
       return (
         <div>
           <h2>Backlog du projet "{projectName}"</h2>
-          <ul>{listUS}</ul>
+          <ul>
+            {issues.map(issue => <li>{issue.description},{issue.priorite},{issue.difficulte}</li>)}
+          </ul>
           <Popup trigger={<button className="button btn-primary rounded-circle">+</button>} modal>
             <h1> Nouvel US</h1>
             <form>
@@ -85,7 +87,9 @@ class listIssues extends Component {
       return (
         <div>
           <h2>Tâches du projet "{projectName}"</h2>
-          <ul>{listUS}</ul>
+          <ul>
+            {issues.map(issue => <li>{issue.description},{issue.priorite},{issue.difficulte}</li>)}
+          </ul>
           <Popup trigger={<button className="button btn-primary rounded-circle">+</button>} modal>
             <h1> Nouvel US</h1>
             <form>

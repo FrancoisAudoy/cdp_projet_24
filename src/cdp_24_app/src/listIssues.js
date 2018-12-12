@@ -19,13 +19,15 @@ class listIssues extends Component {
     this.updateList = this.updateList.bind(this);
   }
 
-  createUS(e) {
+  createUS(e, callback) {
     e.preventDefault();
     let descr = document.getElementById("descrUS").value;
     let diff = document.getElementById("diffUS").value;
     let prio = document.getElementById("prioUS").value;
     let issue = { description: descr, difficulty: diff, priority: prio };
-    addIssueToBacklog(this.state._id, issue);
+    addIssueToBacklog(this.state._id, issue)
+      .then(this.updateList())
+      .then(callback());
   }
 
   createTask() {
@@ -94,14 +96,17 @@ class listIssues extends Component {
               </li>)}
           </ul>
           <Popup trigger={<button className="button btn-primary rounded-circle">+</button>} modal>
-            <h1> Nouvel US</h1>
-            <form>
-              Description : <input type="text" id="descrUS" /> <br />
-              Priotité : <input type="text" id="prioUS" /> <br />
-              Difficulté : <input type="text" id="diffUS" /> <br />
-              <input type="submit" id="accept" value="create" onClick={this.createUS} />
-            </form>
-
+            {close => (
+              <div>
+                <h1> Nouvel US</h1>
+                <form>
+                  Description : <input type="text" id="descrUS" /> <br />
+                  Priotité : <input type="text" id="prioUS" /> <br />
+                  Difficulté : <input type="text" id="diffUS" /> <br />
+                  <input type="submit" id="accept" value="create" onClick={(e) => this.createUS(e, close)} />
+                </form>
+              </div>
+            )}
           </Popup>
         </div>
       );

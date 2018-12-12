@@ -65,3 +65,9 @@ export function addIssueToBacklog(backlogId, issue){
     .then(handleErrors)
     .then(response => response.json());
 }
+
+export function deleteBacklogById(issueId){
+  return fetch(BASE_URL + '/backlogs/'+ issueId, useFetchParam('DELETE', {}))
+    .then(handleErrors)
+    .then(response => response.json())
+}

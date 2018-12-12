@@ -7,3 +7,5 @@ db
 
 #VScode
 .vscode
+
+**/node_modules

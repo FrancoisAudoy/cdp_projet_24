@@ -88,10 +88,8 @@ app.get('/backlogs', (req, res) => {
 
 // obtient un backlog en fonction de son projectId, le crée si il n'existe pas
 app.get('/backlogs/fromProjectId/:projectId', (req, res) => {
-  console.log(req.params.projectId);
   var r = models.Backlog.findOne({projectId: req.params.projectId}, function(error, backlog){
     if (error){
-      console.log('error');
       res.status(400).json(error);
     }
     else if(backlog == null){

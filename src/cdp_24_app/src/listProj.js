@@ -10,13 +10,6 @@ class listProj extends Component {
     this.state = {
       projects: [],
     };
-    this.sendNewProjet = this.sendNewProjet.bind(this);
-  }
-
-  sendNewProjet() {
-    let field = document.getElementById("nameProj");
-    createProject(field.value)
-      .catch(error => {console.log(error)});
   }
 
   componentDidMount() {
@@ -41,15 +34,36 @@ class listProj extends Component {
                 projects.map(proj =>
                   <li> <Link to={'/backlog/' + proj._id}> {proj.name}</Link>
                     <Popup trigger={<button className="button btn-primary rounded-circle">Supprimer</button>} modal>
-                      <h1>Êtes-vous sûr de vouloir supprimer le projet "{proj.name}" ?</h1>
-                      <button onClick={() => deleteProjectById(proj._id)}>Supprimer</button>
+                      {close => (
+                        <div>
+                          <h1>Êtes-vous sûr de vouloir supprimer le projet "{proj.name}" ?</h1>
+                          <button
+                            onClick={() => {
+                              deleteProjectById(proj._id)
+                                .then(close())
+                                .catch(error => {console.log(error)});
+                            }}>
+                            Supprimer
+                          </button>
+                        </div>
+                      )}
                     </Popup>
                   </li>)
               }</ul>
               <Popup trigger={<button className="button btn-primary rounded-circle">+</button>} modal>
-                <h1> Nouveau Projet</h1>
-                  Nom : <input type="text" id="nameProj" />
-                  <input type="submit" id="accept" value="create" onClick={this.sendNewProjet} />
+                {close => (
+                  <div>
+                    <h1> Nouveau Projet</h1>
+                    Nom : <input type="text" id="nameProj" />
+                    <input type="submit" id="accept" value="create"
+                       onClick={() => {
+                         let field = document.getElementById("nameProj");
+                         createProject(field.value)
+                           .then(close())
+                           .catch(error => {console.log(error)});
+                       }} />
+                  </div>
+                )}
               </Popup>
             </div>
           </div>
@@ -58,5 +72,8 @@ class listProj extends Component {
     )
   }
 }
+
+//                        <button onClick={close}>Supprimer</button>
+
 
 export default listProj;

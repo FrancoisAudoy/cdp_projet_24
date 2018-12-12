@@ -15,9 +15,7 @@ class listProj extends Component {
 
   sendNewProjet() {
     let field = document.getElementById("nameProj");
-    console.log(field.value);
-    let ret = createProject(field.value);
-    console.log(ret);
+    createProject(field.value);
   }
 
   componentDidMount() {
@@ -41,7 +39,7 @@ class listProj extends Component {
             <div className="col-sm col-9">
               <ul className="list-group m-5" id="list_proj">{
                 projects.map(proj =>
-                  <li> <Link to={'/backlog/' + proj.name}> {proj.name}</Link>
+                  <li> <Link to={'/backlog/' + proj._id}> {proj.name}</Link>
                     <Popup trigger={<button className="button btn-primary rounded-circle">Supprimer</button>} modal>
                       <h1>Êtes-vous sûr de vouloir supprimer le projet "{proj.name}" ?</h1>
                       <button onClick={() => deleteProjectById(proj._id)}>Supprimer</button>

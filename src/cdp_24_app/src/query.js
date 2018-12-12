@@ -27,10 +27,7 @@ function handleErrors(response) {
 export function getAllProjects(){
   return fetch(BASE_URL + '/projects')
     .then(handleErrors)
-    .then(response => response.json())
-    .then(data => {
-      return data;
-    });
+    .then(response => response.json());
 }
 
 export function createProject(projectName){
@@ -47,17 +44,9 @@ export function createProject(projectName){
 
 // check url for injection
 export function getProjectById(projectId){
-    fetch(BASE_URL + '/projects/'+projectId)
-        .then((response) => {
-            if (!isError(response.status)) {
-                var json = JSON.parse(response.responseText);
-                return json;
-            } else {
-                console.log("getAllProjects : unhandled error code : %d", response.status);
-                console.log(JSON.parse(response.responseText));
-                return {};
-            }
-        });
+  fetch(BASE_URL + '/projects/'+projectId)
+    .then(handleErrors)
+    .then(response => response.json());
 }
 
 // check url for injection
@@ -69,46 +58,15 @@ export function deleteProjectById(projectId){
 }
 
 export function getAllBacklogs(){
-  const req = new XMLHttpRequest();
-  req.open('GET', BASE_URL + '/backlogs', false);
-  req.send(null);
-  if (req.status === 200) {
-    var json = JSON.parse(req.responseText);
-    return json;
-  } else {
-    console.log("getAllBacklogs : unhandled error code : %d", req.status);
-    console.log(JSON.parse(req.responseText));
-    return {};
-  }
+  fetch(BASE_URL + '/backlogs')
+    .then(handleErrors)
+    .then(response => response.json());
 }
 
 export function getBacklogByProjectId(projectId){
-    fetch(BASE_URL + '/backlogs/fromProjectId/'+projectId)
-        .then((response) => {
-            if (!isError(response.status)) {
-                console.log(response.responseText);
-                var json = JSON.parse(response.responseText);
-                return json;
-            } else {
-                console.log("getAllBacklogs : unhandled error code : %d", response.status);
-                console.log(JSON.parse(response.responseText));
-                return {};
-            }
-	});
-}
-
-export function createBacklog(jsonObject){
-    fetch(BASE_URL + '/backlogs', useFetchParam('POST', jsonObject))
-        .then((response) => {
-            if (!isError(response.status)) {
-                console.log("response : %s", response.responseText);
-                return {};
-            } else {
-                console.log("createBacklog : unhandled error code : %d", response.status);
-                console.log(JSON.parse(response.responseText));
-                return {};
-            }
-	});
+  return fetch(BASE_URL + '/backlogs/fromProjectId/'+projectId)
+    .then(handleErrors)
+    .then(response => response.json());
 }
 
 //Should check projectId url injection

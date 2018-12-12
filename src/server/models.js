@@ -11,7 +11,6 @@ module.exports.Issue = mongoose.model('Issue', IssueSchema);// TODO delete
 
 var BacklogSchema = new Schema({
   projectId: {type: Schema.Types.ObjectId, ref: 'Project', required: true},
-  name: {type: String, required: true, max: 100},
   issues: [IssueSchema]
 });
 module.exports.Backlog = mongoose.model('Backlog', BacklogSchema);

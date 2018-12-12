@@ -86,31 +86,31 @@ app.get('/backlogs', (req, res) => {
   });
 });
 
-// crée un backlog appartenant au projet
-app.post('/backlogs', (req, res) => {
-  var backlog = new models.Backlog();
-  // TODO check if there is a project, check if it already has a backlog
-  backlog.projectId = req.body.projectId;
-  backlog.name = req.body.name;
-  backlog.save(function(error, backlog){
-    if(error)
-      res.status(400).json(error);
-    else
-      res.status(201).json({msg : 'Added Backlog'});
-  });
-});
-
-// obtient un backlog en fonction de son projectId
+// obtient un backlog en fonction de son projectId, le crée si il n'existe pas
 app.get('/backlogs/fromProjectId/:projectId', (req, res) => {
   console.log(req.params.projectId);
   var r = models.Backlog.findOne({projectId: req.params.projectId}, function(error, backlog){
-    if (error)
+    if (error){
+      console.log('error');
       res.status(400).json(error);
-    else
+    }
+    else if(backlog == null){
+      var backlog = new models.Backlog();
+      // TODO check if there is a project, check if it already has a backlog
+      backlog.projectId = req.params.projectId;
+      backlog.save(function(error, backlog){
+        if(error)
+          res.status(400).json(error);
+        else
+          res.status(201).json(backlog);
+      });
+    }
+    else {
       res.json(backlog);
+    }
   });
   if(r == null)
-    res.status(404).json(null);
+    res.status(400).json(null);
 });
 
 // modifie un backlog

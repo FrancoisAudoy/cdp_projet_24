@@ -8,12 +8,13 @@
     "react-modal": "^3.6.1",
     "react-router-dom": "^4.3.1",
     "react-scripts": "^2.1.1",
-    "reactjs-popup": "^1.3.1"
+    "reactjs-popup": "^1.3.1",
+    "testcafe": "^0.23.2"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test All.test.js --watchAll=false",
+    "test": "testcafe firefox src/tests/pageAddProj.test.js",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

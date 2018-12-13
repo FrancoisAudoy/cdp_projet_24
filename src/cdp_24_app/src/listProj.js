@@ -55,12 +55,12 @@ class listProj extends Component {
                     </Popup>
                   </li>)
               }</ul>
-              <Popup trigger={<button className="button btn-primary rounded-circle">+</button>} modal>
+              <Popup trigger={<button id="AddProjet" className="button btn-primary rounded-circle">+</button>} modal>
                 {close => (
                   <div>
                     <h1> Nouveau Projet</h1>
                     Nom : <input type="text" id="nameProj" />
-                    <input type="submit" id="accept" value="create"
+                    <input type="submit" id="submit-button"  value="create"
                        onClick={() => {
                          let field = document.getElementById("nameProj");
                          createProject(field.value)

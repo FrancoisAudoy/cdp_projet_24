@@ -1,7 +1,13 @@
 import React, { Component } from "react";
 import Popup from 'reactjs-popup';
 
-import { getProjectById, getBacklogByProjectId, addIssueToBacklog, deleteBacklogById } from "./query";
+import { getProjectById,
+         getBacklogByProjectId,
+         addIssueToBacklog,
+         deleteIssueFromBacklog,
+         deleteBacklogById,
+         updateBacklog
+} from "./query";
 
 class listIssues extends Component {
   constructor() {
@@ -67,14 +73,13 @@ class listIssues extends Component {
     const { issues } = this.state;
     const { _id } = this.state;
     let listUS;
-    console.log(issues);
 
     if (this.state.listType === "backlog") {
       return (
         <div>
           <h2>Backlog du projet "{projectName}"</h2>
           <ul>
-            {issues.map(issue =>
+            {issues.map((issue, index) =>
               <li>
                 {issue.description}, {issue.priority}, {issue.difficulty}
                 <Popup trigger={<button className="button btn-primary rounded-circle">Supprimer</button>} modal>
@@ -83,7 +88,8 @@ class listIssues extends Component {
                       <h1>Êtes-vous sûr de vouloir supprimer l'us "{issue.description}" ?</h1>
                       <button
                         onClick={() => {
-                         deleteBacklogById(_id)
+                         let backlogObject = {issues:issues.slice(0,index).concat(issues.slice(index+1,issues.length))}
+                         updateBacklog(_id, backlogObject)
                             .then(this.updateList())
                             .then(close())
                             .catch(error => { console.log(error) });

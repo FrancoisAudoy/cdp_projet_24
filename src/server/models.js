@@ -6,8 +6,9 @@ var IssueSchema = new Schema({
   description: {type: String, required: true, max: 1000},
   difficulty: {type: Number, default: 0},
   priority: {type: String, enum: ['', 'low', 'medium', 'high'], default: ''}
-},{ _id : false });
-module.exports.Issue = mongoose.model('Issue', IssueSchema);// TODO delete
+});
+//},{ _id : false }); // TODO : delete if we really don't use _id
+module.exports.Issue = mongoose.model('Issue', IssueSchema);
 
 var BacklogSchema = new Schema({
   projectId: {type: Schema.Types.ObjectId, ref: 'Project', required: true},

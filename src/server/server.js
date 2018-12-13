@@ -113,12 +113,23 @@ app.get('/backlogs/fromProjectId/:projectId', (req, res) => {
 
 // modifie un backlog
 app.put('/backlogs/:backlog', (req, res) => {
-  // TODO
+  var r = models.Backlog.findOneAndUpdate({_id: req.params.backlog}, {
+    issues: req.body.issues
+  },  { runValidators: true }, function(error, backlog){
+    if (error)
+      res.status(400).json(error);
+    else if (backlog){
+      res.json(backlog);
+    }
+    else
+      res.status(404).json({});
+  });
 });
 
-// supprime un backlog
-app.delete('/backlogs/:backlog', (req,res) => {
-  models.Backlog.findOneAndDelete({_id: req.params.backlog}, function(error, backlog){
+// ajoute une issue à un backlog
+app.post('/backlogs/:backlog/issue', (req, res) => {
+  var issue = new models.Issue(req.body);
+  var r = models.Backlog.findOneAndUpdate({_id: req.params.backlog}, {$push: {issues: issue}}, {upsert:true, runValidators:true}, function(error, backlog){
     if (error)
       res.status(400).json(error);
     else if (backlog)
@@ -128,10 +139,9 @@ app.delete('/backlogs/:backlog', (req,res) => {
   });
 });
 
-// ajoute une issue à un backlog
-app.post('/backlogs/:backlog/issue', (req, res) => {
-  var issue = new models.Issue(req.body);
-  var r = models.Backlog.findOneAndUpdate({_id: req.params.backlog}, {$push: {issues: issue}}, {upsert:true}, function(error, backlog){
+// supprime un backlog
+app.delete('/backlogs/:backlog', (req,res) => {
+  models.Backlog.findOneAndDelete({_id: req.params.backlog}, function(error, backlog){
     if (error)
       res.status(400).json(error);
     else if (backlog)
